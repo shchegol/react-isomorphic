@@ -1,6 +1,6 @@
 import React, { PropTypes, Component } from 'react';
 
-import './App.css';
+import './HelloWorldPage.css';
 
 const propTypes = {
     initialName: PropTypes.string
@@ -10,7 +10,7 @@ const defaultProps = {
     initialName: 'Аноним'
 };
 
-class App extends Component {
+class HelloWorldPage extends Component {
     constructor(props) {
         super(props);
 
@@ -63,7 +63,7 @@ class App extends Component {
     }
 }
 
-App.propTypes = propTypes;
-App.defaultProps = defaultProps;
+HelloWorldPage.propTypes = propTypes;
+HelloWorldPage.defaultProps = defaultProps;
 
-export default App;
+export default HelloWorldPage;
