@@ -1,12 +1,23 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import {browserHistory, Router} from 'react-router';
-import routes from './routes';
+import ReactDOM from 'react-dom'
+import { BrowserRouter } from 'react-router-dom'
+import App from './App'
 
-const component = (
-    <Router history={browserHistory}>
-        {routes}
-    </Router>
-);
+ReactDOM.render((
+    <BrowserRouter>
+        <App/>
+    </BrowserRouter>
+), document.getElementById('app'))
 
-ReactDOM.render(component, document.getElementById('react-view'));
+
+// import React from 'react';
+// import ReactDOM from 'react-dom';
+// import {browserHistory, Router} from 'react-router';
+// import routes from './routes';
+//
+// const component = (
+//     <Router history={browserHistory}>
+//         {routes}
+//     </Router>
+// );
+//
+// ReactDOM.render(component, document.getElementById('react-view'));
