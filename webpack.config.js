@@ -4,28 +4,23 @@ const webpack = require('webpack');
 const path = require('path');
 const ExtractTextPlugin = require("extract-text-webpack-plugin");
 const CleanWebpackPlugin = require('clean-webpack-plugin');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
 
+const environment = process.env.NODE_ENV;
 const publicPath = 'http://localhost:8050/public/assets';
-const cssName = process.env.NODE_ENV === 'production' ? 'styles-[hash].css' : 'styles.css';
-const jsName = process.env.NODE_ENV === 'production' ? 'bundle-[hash].js' : 'bundle.js';
+const cssName = environment === 'production' ? 'styles-[hash].css' : 'styles.css';
+const jsName = environment === 'production' ? 'bundle-[hash].js' : 'bundle.js';
 const plugins = [
     new webpack.DefinePlugin({
         'process.env': {
             BROWSER: JSON.stringify(true),
-            NODE_ENV: JSON.stringify(process.env.NODE_ENV || 'development')
+            NODE_ENV: JSON.stringify(environment || 'development')
         }
     }),
     new ExtractTextPlugin(cssName),
     new webpack.LoaderOptionsPlugin({
-        debug: process.env.NODE_ENV !== 'production',
+        debug: environment !== 'production',
     }),
     new CleanWebpackPlugin(['dist']),
-    new HtmlWebpackPlugin({
-        template: 'index.ejs',
-        title: 'React',
-        favicon: '../favicon.ico'
-    }),
     new webpack.HotModuleReplacementPlugin(),
     new webpack.ProvidePlugin({
         $: 'jquery',
@@ -33,7 +28,7 @@ const plugins = [
     }),
 ];
 
-if (process.env.NODE_ENV === 'production') {
+if (environment === 'production') {
     plugins.push(
         new CleanWebpackPlugin(['public/assets/'], {
             root: __dirname,
@@ -96,10 +91,9 @@ module.exports = {
             {test: /\.svg/, use: 'url-loader?limit=26000&mimetype=image/svg+xml'},
         ]
     },
-    devtool: process.env.NODE_ENV !== 'production' ? 'source-map' : null,
+    devtool: environment !== 'production' ? 'source-map' : null,
     devServer: {
         hot: true,
-        contentBase: path.resolve(__dirname, 'dist'),
-        publicPath: '/'
+        headers: { 'Access-Control-Allow-Origin': '*' }
     }
 };

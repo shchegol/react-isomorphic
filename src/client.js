@@ -1,3 +1,5 @@
-import home from './containers/Home/Home'
+import React      from 'react';
+import ReactDOM   from 'react-dom';
+import App        from './components/App';
 
-home.start();
+ReactDOM.render(<App />, document.getElementById('react-view'));
