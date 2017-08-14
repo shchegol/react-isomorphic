@@ -1,4 +1,4 @@
-import { INCREMENT_COUNTER } from '../../redux/actions/counterActions';
+import { INCREMENT_COUNTER, DECREMENT_COUNTER } from '../../redux/actions/counterActions';
 
 const initialState = { value: 0 };
 

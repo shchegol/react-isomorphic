@@ -1,10 +1,10 @@
 import express from 'express';
 import React from 'react';
-import ReactDom from 'react-dom/server';
+import { renderToString } from 'react-dom/server'
 import {match, RouterContext} from 'react-router';
 import routes from './routes';
 import {Provider} from 'react-redux';
-import configureStore from './redux/configureStore';
+import configureStore from './redux/configureStore.dev';
 
 const app = express();
 
@@ -23,8 +23,8 @@ app.use((req, res) => {
         }
 
         const store = configureStore();
-        const componentHTML = ReactDom.renderToString(
-            <Provider store={store}>
+        const componentHTML = renderToString(
+            <Provider store={store} key="provider">
                 <RouterContext {...renderProps} />
             </Provider>
         );
@@ -47,6 +47,7 @@ function renderHTML(componentHTML) {
       </head>
       <body>
         <div id="react-view">${componentHTML}</div>
+        <div id="dev-tools"></div>
         <script type="application/javascript" src="${assetUrl}/public/assets/bundle.js"></script>
       </body>
     </html>
